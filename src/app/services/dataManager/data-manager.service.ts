@@ -122,7 +122,7 @@ export class DataManagerService {
   private async init() {
     //change to use station group listed in dataset
     let metadataReq: RequestResults = await this.reqFactory.getStationMetadata({
-      station_group: "american_samoa_climate_primary"
+      station_group: "guam_climate_primary"
     });
 
     metadataReq.transformData((data: any) => {

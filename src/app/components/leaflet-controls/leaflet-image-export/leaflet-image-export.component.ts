@@ -64,7 +64,7 @@ export class LeafletImageExportComponent implements OnInit {
       croppedCtx.putImageData(imgData, 0, 0);
 
       let link = document.createElement("a");
-      link.download = "ASCDP_map.png";
+      link.download = "GCDP_map.png";
       link.href = croppedCanvas.toDataURL("image/png");
       document.body.appendChild(link);
       link.click();

@@ -27,7 +27,7 @@ export class MapComponent implements OnInit {
   @ViewChild("mapElement", {static: false}) mapElement: ElementRef;
   @ViewChild("layerController", {static: true}) layerController: LeafletLayerControlExtensionComponent;
 
-  readonly bounds: [number, number][] = [ [-14.8088, -171.2955], [-13.7814, -170.0845] ];
+  readonly bounds: [number, number][] = [ [13.2333, 144.6153], [13.6558, 144.9603] ];
   //private R: any = L;
 
   selectedMapCell: L.Layer;
@@ -93,7 +93,7 @@ export class MapComponent implements OnInit {
     this.options = {
       layers: this.baseLayers["Satellite (Google)"],
       zoom: 11,
-      center: L.latLng(-14.2951, -170.6900),
+      center: L.latLng(13.444583, 144.787778),
       attributionControl: false,
       minZoom: 10,
       maxBounds: this.bounds

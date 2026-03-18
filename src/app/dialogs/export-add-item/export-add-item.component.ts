@@ -14,7 +14,7 @@ import { DateManagerService } from 'src/app/services/dateManager/date-manager.se
   styleUrls: ['./export-add-item.component.scss']
 })
 export class ExportAddItemComponent implements AfterViewInit {
-  private static readonly FORM_ORDER = ["rainfall", "prism_climatology", "downscaled"];
+  private static readonly FORM_ORDER = ["rainfall"];
 
   @ViewChild("t1", {static: false}) t1: MatTabGroup;
   @ViewChildren("t2") t2: QueryList<MatTabGroup>;

@@ -5,6 +5,6 @@
 export const environment = {
   production: true,
   name: 'prod',
-  assetBaseUrl: 'https://hcdp.github.io/ascdp/',
-  baseUrl:'https://hcdp.github.io/ascdp/'
+  assetBaseUrl: 'https://hcdp.github.io/gcdp/',
+  baseUrl:'https://hcdp.github.io/gcdp/'
 };
