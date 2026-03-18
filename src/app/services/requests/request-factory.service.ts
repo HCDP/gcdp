@@ -111,7 +111,7 @@ export class RequestFactoryService {
           values: entries.map((pair: [string, number]) => {
             return {
               value: pair[1],
-              date: moment(pair[0]).tz("Pacific/Honolulu")
+              date: moment(pair[0]).tz("Pacific/Guam")
             };
           })
         };
@@ -149,21 +149,21 @@ export class RequestFactoryService {
   async getStationData(properties: any, printTiming: boolean = true, delay?: number): Promise<RequestResults> {
     properties = Object.assign({}, properties);
     delete properties.dateRange;
-    let query = this.propertiesToQuery("hcdp_station_value", properties);
+    let query = this.propertiesToQuery("gcdp_station_value", properties);
     let timingMessage = printTiming ? `Retreived station data for ${properties.date}`: undefined;
     let response = await this.tapisQueryDispatch(query, ReqPriority.HIGH, timingMessage, delay);
     return response;
   }
 
   async getStationMetadata(properties: any, printTiming: boolean = true, delay?: number): Promise<RequestResults> {
-    let query = this.propertiesToQuery("hcdp_station_metadata", properties);
+    let query = this.propertiesToQuery("gcdp_station_metadata", properties);
     let timingMessage = printTiming ? `Retreived station metadata`: undefined;
     let response = await this.tapisQueryDispatch(query, ReqPriority.HIGH, timingMessage, delay);
     return response;
   }
 
   async getStationTimeseries(start: string, end: string, timeseriesData: TimeseriesData, location: MapLocation, properties: any, printTiming: boolean = true, delay?: number): Promise<RequestResults> {
-    let query = this.propertiesToQuery("hcdp_station_value", properties);
+    let query = this.propertiesToQuery("gcdp_station_value", properties);
     query = `{'$and':[${query},{'value.date':{'$gte':'${start}'}},{'value.date':{'$lt':'${end}'}}]}`;
     let timingMessage = printTiming ? `Retreived station ${properties.station_id} timeseries for ${start}-${end}`: undefined;
     let response = await this.tapisQueryDispatch(query, ReqPriority.MEDIUM, timingMessage, delay);
@@ -175,7 +175,7 @@ export class RequestFactoryService {
           values: data.map((item: any) => {
             return {
               value: item.value,
-              date: moment(item.date).tz("Pacific/Honolulu", true)
+              date: moment(item.date).tz("Pacific/Guam", true)
             };
           })
         }

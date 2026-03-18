@@ -22,7 +22,7 @@ export class ExportManagerService {
     }]
   };
 
-  static readonly EXPORT_PACKAGE_NAME = "ASCDP_data.zip"
+  static readonly EXPORT_PACKAGE_NAME = "GCDP_data.zip"
 
   //lets just set a maximum number of files instead of a size for simplicity
   static readonly MAX_INSTANT_PACKAGE_FILES = 150;

@@ -110,7 +110,6 @@ export class DataManagerService {
     if(this.lastLocation?.type != "virtual_station" || row != (<V_Station>this.lastLocation).cellData.row || col != (<V_Station>this.lastLocation).cellData.col) {
       const { rasterParams } = this.dataset;
       let properties: any = {
-        extent: "statewide",
         row,
         col,
         ...rasterParams
@@ -123,7 +122,7 @@ export class DataManagerService {
   private async init() {
     //change to use station group listed in dataset
     let metadataReq: RequestResults = await this.reqFactory.getStationMetadata({
-      station_group: "hawaii_climate_primary"
+      station_group: "guam_climate_primary"
     });
 
     metadataReq.transformData((data: any) => {
@@ -218,7 +217,6 @@ export class DataManagerService {
       if(includeRaster) {
         let properties = {
           returnEmptyNotFound: true,
-          extent: "statewide",
           ...additionalParams,
           ...rasterParams
         }

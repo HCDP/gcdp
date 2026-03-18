@@ -41,7 +41,8 @@
 
 .view-component {
   height: fit-content;
-  min-height: 30vh;
+  //100vh + top and bottom padding min height
+  min-height: calc(175vh + 240px);
   width: fit-content;
   min-width: 100%;
   box-sizing: border-box;

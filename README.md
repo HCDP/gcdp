@@ -1,2 +1,2 @@
-# ASCDP
-Application for dissemination and visualizing climate data for American Samoa
+# GCDP
+Application for dissemination and visualizing climate data for Guam
