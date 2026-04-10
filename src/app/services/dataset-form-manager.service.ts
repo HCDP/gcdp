@@ -23,6 +23,8 @@ export class DatasetFormManagerService {
     ////values
     //////period
     let periodDay = new FormValue(new DisplayData("Data measured at a daily time scale.", "Daily", "day"), {period: "day"}, [true, true]);
+    let periodMonth = new FormValue(new DisplayData("Data measured at a monthly time scale.", "Monthly", "month"), {period: "month"}, [true, true]);
+
     //fill
     let fillPartialFilled = new FormValue(new DisplayData("This data has undergone QA/QC and is partially filled using statistical techniques to estimate some missing station values.", "Partial Filled", "partial"), {fill: "partial"}, [false, true]);
     // //Climatology mean type
@@ -86,7 +88,8 @@ export class DatasetFormManagerService {
     ]);
 
     let periodNode = new FormNode(new DisplayData("The time period over which the data is measured.", "Time Period", "period"), [
-      periodDay
+      periodDay,
+      periodMonth
     ]);
     // let prismClimatologyMeanTypeNode = new FormNode(new DisplayData("The type of data aggregation", "Mean Type", "mean_type"), [
     //   meanMonthly,
@@ -195,14 +198,19 @@ export class DatasetFormManagerService {
     ////dates
 
     ////periods
+    let yearPeriod = new PeriodData("year", 1, "year");
     let monthPeriod = new PeriodData("month", 1, "month");
     let dayPeriod = new PeriodData("day", 1, "day");
     ////focus managers
     let rainfallDayTimeseriesData = new TimeseriesData(dayPeriod, monthPeriod, this.dateHandler);
-
+    let rainfallMonthTimeseriesData = new TimeseriesData(monthPeriod, yearPeriod, this.dateHandler);
 
     let rainfallDayPartial = new VisDatasetItem(true, true, "Millimeters", "mm", "Rainfall", "Daily Rainfall", [0, 20], [true, false], rainfallDayTimeseriesData, [rainfallDayTimeseriesData], false, {
       period: "day",
+      fill: "partial"
+    }, null, this.requestFactory);
+    let rainfallMonthPartial = new VisDatasetItem(true, true, "Millimeters", "mm", "Rainfall", "Monthly Rainfall", [0, 650], [true, false], rainfallMonthTimeseriesData, [rainfallMonthTimeseriesData, rainfallDayTimeseriesData], false, {
+      period: "month",
       fill: "partial"
     }, null, this.requestFactory);
     // //climatologies
@@ -401,6 +409,7 @@ export class DatasetFormManagerService {
       datatype: "rainfall"
     }, rainfallFormData, [
       rainfallDayPartial,
+      rainfallMonthPartial
     ]);
 
     // //climatologies
@@ -485,6 +494,8 @@ export class DatasetFormManagerService {
 
     let rainfallDayMapFileGroup = new FileGroup(new DisplayData("", "", "a"), [rainfallMapFile, metadataFile], [rfMmUnitsProperty]);
     let rainfallDayStationFileGroup = new FileGroup(new DisplayData("", "", "aa"), [stationFile], [rfMmUnitsProperty, fillProperty]);
+    let rainfallMonthMapFileGroup = new FileGroup(new DisplayData("", "", "bb"), [rainfallMapFile], [rfMmUnitsProperty]);
+    let rainfallMonthStationFileGroup = new FileGroup(new DisplayData("", "", "bc"), [stationFile], [rfMmUnitsProperty, fillProperty]);
     // let prismClimatologyRainfallMonthFileGroup = new FileGroup(new DisplayData("", "", "b"), [prismClimatologyRainfallMapFile, metadataFile], [rfdsUnitsProperty, monthPrismClimatologyProperty]);
     // let prismClimatologyRainfall30yrFileGroup = new FileGroup(new DisplayData("", "", "c"), [prismClimatologyRainfallMapFile, metadataFile], [rfdsUnitsProperty, yr30PrismClimatologyProperty]);
     // let prismClimatologyTemperatureMonthFileGroup = new FileGroup(new DisplayData("", "", "d"), [prismClimatologyTemperatureMapFile, metadataFile], [tempdsUnitsProperty, monthPrismClimatologyProperty]);
@@ -498,6 +509,9 @@ export class DatasetFormManagerService {
     let rainfallDayExportItem = new ExportDatasetItem([rainfallDayMapFileGroup, rainfallDayStationFileGroup], {
       period: "day",
     }, "Daily Rainfall", rainfallDayTimeseriesData, this.requestFactory);
+    let rainfallMonthExportItem = new ExportDatasetItem([rainfallMonthMapFileGroup, rainfallMonthStationFileGroup], {
+      period: "month",
+    }, "Monthly Rainfall", rainfallMonthTimeseriesData, this.requestFactory);
     // let prismClimatologyRainfallMonthExportItem = new ExportDatasetItem([prismClimatologyRainfallMonthFileGroup], {
     //   mean_type: "mean_monthly"
     // }, "PRISM Mean Monthly Rainfall Climatologies", null, this.requestFactory);
@@ -614,7 +628,8 @@ export class DatasetFormManagerService {
       location: "guam",
       datatype: "rainfall"
     }, periodOnlyFormData, [
-      rainfallDayExportItem
+      rainfallDayExportItem,
+      rainfallMonthExportItem
     ]);
 
     // let prismClimatologyRainfallExportDataset = new Dataset<ExportDatasetItem>(prismClimatologyRainfallDatasetDisplayData, {
