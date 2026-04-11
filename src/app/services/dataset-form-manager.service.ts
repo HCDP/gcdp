@@ -1345,7 +1345,6 @@ export class OptionData {
   }
 
   get unitData() {
-    console.log(this._viewDataMap, this._type);
     return this._viewDataMap[this._type].units[this.unit];
   }
   get typeNode(): FormNode {
