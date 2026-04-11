@@ -12,7 +12,7 @@ import { MatTabGroup } from '@angular/material/tabs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataSetFormComponent implements OnInit, AfterViewInit {
-  private static readonly FORM_ORDER = ["rainfall"];
+  private static readonly FORM_ORDER = ["rainfall", "prism_climatology", "downscaled"];
 
   datasetData: DatasetData[];
 
@@ -54,7 +54,6 @@ export class DataSetFormComponent implements OnInit, AfterViewInit {
 
   setupDatasetData() {
     this.datasetData = new Array(DataSetFormComponent.FORM_ORDER.length);
-
     for(let group of this.formData.datasetFormData.datasetGroups) {
       let i = DataSetFormComponent.FORM_ORDER.indexOf(group.tag);
       this.datasetData[i] = <DatasetGroupData>{
