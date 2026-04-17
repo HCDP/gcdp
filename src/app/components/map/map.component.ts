@@ -322,9 +322,9 @@ export class MapComponent implements OnInit {
 
   isExperimental() {
     let experimental = false;
-    // if(this.dataset && !this.loading) {
-    //   experimental = ["rainfall", "ignition_probability"].includes(this.dataset.rasterParams.datatype)  && this.dataset.rasterParams.period == "day" && this.active.data.raster.getBands()["0"].size > 0;
-    // }
+    if(this.dataset && !this.loading) {
+      experimental = ["rainfall"].includes(this.dataset.rasterParams.datatype) && this.active.data.raster.getBands()["0"].size > 0;
+    }
     return experimental;
   }
 
